@@ -124,6 +124,23 @@ button {
 .projects-container {
     background-color: blue;
     grid-area: 1/1/3/1;
+    display: grid;
+    grid-template-rows: .04fr auto;
+}
+
+.cards-label {
+
+}
+
+.cards-container {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    margin: 20px;
+    gap: 20px;
+}
+
+.card {
+ background-color: white;
 }
 
 .announcements-container {
