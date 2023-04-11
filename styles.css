@@ -129,19 +129,41 @@ button {
 }
 
 .cards-label {
-
+    font-size: 22px;
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
 .cards-container {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(2, 1fr);
     margin: 20px;
+    margin-top: 10px;
     gap: 20px;
 }
 
 .card {
- background-color: white;
- border-radius: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border-left: 10px solid orange;
+    display: flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    padding: 7px;
+
+}
+
+.card-title {
+    margin: 5px;
+}
+
+.card-text {
+    margin: 5px;
+}
+
+.card-icon-container {
+    display:flex;
+    align-self: end;
 }
 
 .announcements-container {
