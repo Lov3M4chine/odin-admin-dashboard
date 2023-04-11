@@ -46,8 +46,32 @@ html body {
 
 .header-container {
     background-color: blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.search-container {
+    background-color: red;
+    grid-area: 1/1/1/1;
+}
+
+.profile-container {
+    background-color: green;
+    grid-area: 1/2/1/2;
+}
+
+.welcome-contaner {
+    background-color: yellow;
+    grid-area: 2/1/2/1;
+}
+
+.controls-container {
+    background-color: pink;
+    grid-area: 2/2/2/2;
 }
 
 .content-container {
-    background-color: blueviolet;
+    background-color: purple;
 }
+
