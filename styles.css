@@ -39,5 +39,15 @@ html body {
 
 .right-container {
     grid-area: 1/2/1/2;
-    background-color: brown;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 15vh;
+}
+
+.header-container {
+    background-color: blue;
+}
+
+.content-container {
+    background-color: blueviolet;
 }
