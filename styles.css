@@ -1,0 +1,19 @@
+html body {
+    margin: 0;
+}
+
+.main-container {
+    display: grid;
+    grid-template-rows: 100vh;
+    grid-template-columns: minmax(200px, clamp(200px, 20vw, 300px)) auto;
+}
+
+.left-container {
+    grid-area: 1/1/1/1;
+    background-color: aqua;
+}
+
+.right-container {
+    grid-area: 1/2/1/2;
+    background-color: brown;
+}
