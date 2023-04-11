@@ -45,7 +45,6 @@ html body {
 }
 
 .header-container {
-    background-color: blue;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -61,7 +60,7 @@ html body {
     grid-area: 1/2/1/2;
 }
 
-.welcome-contaner {
+.welcome-container {
     background-color: yellow;
     grid-area: 2/1/2/1;
 }
