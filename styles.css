@@ -53,12 +53,30 @@ html body {
 .search-container {
     background-color: red;
     grid-area: 1/1/1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.search-icon {
+
+}
+
+.search-bar {
+    border: 2px solid black;
+    background-color: grey;
+    border-radius: 5px;
+    width: 70%;
+    height: 30%;
 }
 
 .profile-container {
     background-color: green;
     grid-area: 1/2/1/2;
 }
+
+
 
 .welcome-container {
     background-color: yellow;
