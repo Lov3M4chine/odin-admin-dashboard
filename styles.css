@@ -154,6 +154,7 @@ button {
 }
 
 .card-title {
+    font-weight: bold;
     margin: 5px;
 }
 
@@ -174,7 +175,18 @@ button {
 }
 
 .announcements-label {
+    font-size: 22px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
 
+.announcement-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.announcement-text {
+    font-size: 12px;
 }
 
 .announcement-cards-container {
@@ -185,6 +197,10 @@ button {
 .announcement-card {
     background-color: white;
     border: 5px solid black;
+    margin: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 10px;
 }
 
 .trending-container {
