@@ -141,11 +141,27 @@ button {
 
 .card {
  background-color: white;
+ border-radius: 5px;
 }
 
 .announcements-container {
     background-color: orange;
     grid-area: 1/2/1/2;
+    display: grid;
+    grid-template-rows: .04fr auto;
+}
+
+.announcements-label {
+
+}
+
+.announcement-cards-container {
+    display: grid;
+    grid-template: repeat(3, auto) / 1fr
+}
+
+.announcement-card {
+    background-color: white;;
 }
 
 .trending-container {
