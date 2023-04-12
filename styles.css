@@ -143,9 +143,10 @@ button {
 }
 
 .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    justify-content: start;
     margin: 2vw;
     margin-top: 1vw;
     margin-bottom: 0px;;
@@ -160,6 +161,8 @@ button {
     flex-direction: column;
     padding: .7vw;
     margin-bottom: 5px;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 .card-title {
@@ -168,7 +171,10 @@ button {
 }
 
 .card-text {
+    font-size: min(max(12px, calc(.5vw + .5vh)), 18px);
     margin: .5vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-icon-container {
@@ -188,7 +194,7 @@ button {
 }
 
 .announcements-label {
-    font-size: 12px;
+    font-size: clamp(12px, calc(1vw + 1vh), 48px);
     margin-top: 1vw;
     justify-self: center;
 }
