@@ -5,7 +5,7 @@ html body {
 .main-container {
     display: grid;
     grid-template-rows: 100vh;
-    grid-template-columns: minmax(100px, clamp(200px, 20vw, 300px)) auto;
+    grid-template-columns: minmax(175px, clamp(200px, 20vw, 300px)) auto;
 }
 
 .left-container {
@@ -68,7 +68,7 @@ html body {
     background-color: grey;
     border-radius: 5px;
     width: 70%;
-    height: 30%;
+    height: 40%;
 }
 
 .profile-container {
@@ -129,7 +129,7 @@ button {
 }
 
 .cards-label {
-    font-size: 2.2vw;
+    font-size: clamp(12px, calc(1vw + 1vh), 48px);
     margin-left: 2vw;
     margin-top: 1vw;
 }
@@ -178,18 +178,27 @@ button {
 }
 
 .announcements-label {
-    font-size: 2.2vw;
-    margin-left: 2vw;
+    font-size: clamp(12px, calc(1vw + 1vh), 48px);
     margin-top: 1vw;
+    justify-self: center;
 }
 
 .announcement-title {
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: clamp(12px, calc(1vw + 0.5vh), 24px);
+    margin-top: .5vh;
+    margin-bottom: .5vh;
+    display:flex;
+    justify-content: center;
 }
 
 .announcement-text {
-    font-size: 1.2vw;
+    font-size: clamp(10px, calc(0.8vw + 0.4vh), 18px);
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    display: flex;
+    justify-content: center;
+    padding: .5vw;
 }
 
 .announcement-cards-container {
@@ -198,12 +207,12 @@ button {
 }
 
 .announcement-card {
-    background-color: white;
-    border: 5px solid black;
+    border-bottom: .5vh solid rgba(128, 128, 128, 0.466);
+    border-radius: 10px;
     margin: 2vw;
     margin-bottom: 0px;
     margin-top: 0px;
-    padding: 1vw;
+    padding: 0;
 }
 
 .trending-container {
@@ -214,7 +223,7 @@ button {
 }
 
 .trending-label {
-    font-size: 2.2vw;
+    font-size: clamp(12px, calc(1vw + 1vh), 48px);
     margin-left: 2vw;
     margin-top: 1vw;
 }
@@ -230,27 +239,28 @@ button {
 }
 
 .icons {
-    width: 2vw;
-    height: 2vw;
+    width: clamp(12px, calc(1.5vw + 1.5vh), 36px);
+    height: auto;
     justify-self: center;
     align-self: center;
 }
 
 #dashboard-icon {
-    width: 40px;
-    height: 40px;
+    width: clamp(29px, calc(2vw + 2vh), 48px);
+    height: auto;
     justify-self: center;
     align-self: center;
     padding-top: 10px;
 }
 
 #dashboard-text {
-    font-size: 2.5vw;
-        padding-top: 10px;
+    font-size: clamp(12px, calc(2vw + 2vh), 48px);
+    padding-top: 10px;
+    margin-right: 1vw;
 }
 
 .link {
-    font-size: 1.5vw;
+    font-size: clamp(12px, calc(1.5vw + 1.5vh), 36px);
 }
 
 #profile-picture {
