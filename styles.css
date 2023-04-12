@@ -1,7 +1,5 @@
 html body {
     margin: 0;
-    min-height: 600px;
-    min-width: 800px;
 }
 
 .main-container {
@@ -229,6 +227,8 @@ button {
 .icons {
     width: 2vw;
     height: 2vw;
+    justify-self: center;
+    align-self: center;
 }
 
 #dashboard-icon {
@@ -240,5 +240,9 @@ button {
 
 #dashboard-text {
     font-size: 2.5vw;
+}
+
+.link {
+    font-size: 1.5vw;
 }
 
