@@ -9,6 +9,24 @@
 </head>
 <body>
     <div class="main-container">
+        <div id="card-modal" style="display: none;">
+            <form id="cardForm">
+                <span class="close">&times;</span>
+                <label for="cardTitle">Title:</label>
+                <input type="text" id="cardTitle" name="cardTitle" required>
+                <br>
+                <label for="cardContent">Description:</label>
+                <textarea id="cardContent" name="cardContent" required></textarea>
+                <br>
+                <label for="cardGitLink">Github Link:</label>
+                <input type="url" id="cardGitLink" name="cardGitLink" required>
+                <br>
+                <label for="cardLiveLink">Live Link:</label>
+                <input type="url" id="cardLiveLink" name="cardLiveLink" required>
+                <br>
+                <button id="card-submit-button" type="submit">Submit</button>
+            </form>
+         </div>
         <div class="left-container">
             <div class="icons-container">
                 <img id="dashboard-icon" src="imgs/icons/dashboard.svg" alt="Dashboard icon">
@@ -57,21 +75,7 @@
                 </div>
                 <div class="controls-container">
                     <button id="new-button">New</button>
-                        <form id="cardForm" style="display: none;">
-                            <label for="cardTitle">Title:</label>
-                            <input type="text" id="cardTitle" name="cardTitle" required>
-                            <br>
-                            <label for="cardContent">Description:</label>
-                            <textarea id="cardContent" name="cardContent" required></textarea>
-                            <br>
-                            <label for="cardGitLink">Github Link:</label>
-                            <input type="url" id="cardGitLink" name="cardGitLink" required>
-                            <br>
-                            <label for="cardLiveLink">Live Link:</label>
-                            <input type="url" id="cardLiveLink" name="cardLiveLink" required>
-                            <br>
-                            <button type="submit">Submit</button>
-                        </form>
+        
                     <button id="upload-button">Upload</button>
                     <button id="share-button">Share</button>
                 </div>

@@ -1,12 +1,31 @@
 // Get reference to the button, card form, and card container elements
 const newButton = document.getElementById("new-button");
 const cardForm = document.getElementById("cardForm");
-const cardsContainer = document.querySelector(".cards-container");
+const cardModal = document.getElementById("card-modal");
+const cardsContainer = document.getElementsByClassName("cards-container");
+const closeButton = document.getElementsByClassName("close")[0];
 
-// Show the form when the button is clicked
+// Show the new card modal when the button is clicked
 newButton.addEventListener('click', () => {
-    cardForm.style.display = 'block';
+    cardModal.style.display = 'block';
 });
+
+// Hide the new card modal when form submission is complete
+const hideModal = () => {
+    modal.style.display = 'none';
+};
+
+// Add a click event listener to the exit button
+closeButton.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+// Close the modal when clicking out of the modal content
+window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+})
 
 // Event listener for the form submission
 cardForm.addEventListener("submit", (event) => {
@@ -25,10 +44,12 @@ cardForm.addEventListener("submit", (event) => {
 
     // Create and set the title element
     const title = document.createElement('p');
+    title.className = "card-title";
     title.textContent = cardTitle;
 
     // Create and set the content element
     const content = document.createElement('p');
+    content.className = "card-text"
     content.textContent = cardContent;
 
     // Create a container for the icons
@@ -70,5 +91,6 @@ cardForm.addEventListener("submit", (event) => {
 
     // Reset the form
     cardForm.reset();
+    hideModal();
 });
 
