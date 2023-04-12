@@ -18,7 +18,7 @@ html body {
     grid-template-columns: 1fr 2fr;
 }
 
-.icons {
+.icons-container {
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     height: 60%;
@@ -35,7 +35,8 @@ html body {
 }
 
 .link {
-
+    justify-self: start;
+    align-self: center;
 }
 
 .right-container {
@@ -57,7 +58,7 @@ html body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: .5vw;
 }
 
 .search-icon {
@@ -78,7 +79,7 @@ html body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: .5vw;
 }
 
 .welcome-container {
@@ -108,7 +109,7 @@ html body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: .5vw;
 }
 
 button {
@@ -129,17 +130,18 @@ button {
 }
 
 .cards-label {
-    font-size: 22px;
-    margin-left: 20px;
-    margin-top: 10px;
+    font-size: 2.2vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
 }
 
 .cards-container {
     display: grid;
-    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
-    margin: 20px;
-    margin-top: 10px;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+    margin: 2vw;
+    margin-top: 1vw;
+    gap: 2vw;
 }
 
 .card {
@@ -148,18 +150,16 @@ button {
     border-left: 10px solid orange;
     display: flex;
     flex-direction: column;
-    flex-wrap:wrap;
-    padding: 7px;
-
+    padding: .7vw;
 }
 
 .card-title {
     font-weight: bold;
-    margin: 5px;
+    margin: .5vw;
 }
 
 .card-text {
-    margin: 5px;
+    margin: .5vw;
 }
 
 .card-icon-container {
@@ -175,32 +175,32 @@ button {
 }
 
 .announcements-label {
-    font-size: 22px;
-    margin-left: 20px;
-    margin-top: 10px;
+    font-size: 2.2vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
 }
 
 .announcement-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1.4vw;
 }
 
 .announcement-text {
-    font-size: 12px;
+    font-size: 1.2vw;
 }
 
 .announcement-cards-container {
     display: grid;
-    grid-template: repeat(3, auto) / 1fr
+    grid-template: repeat(auto, auto) / 1fr;
 }
 
 .announcement-card {
     background-color: white;
     border: 5px solid black;
-    margin: 20px;
+    margin: 2vw;
     margin-bottom: 0px;
     margin-top: 0px;
-    padding: 10px;
+    padding: 1vw;
 }
 
 .trending-container {
@@ -211,7 +211,9 @@ button {
 }
 
 .trending-label {
-
+    font-size: 2.2vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
 }
 
 .trending-cards-container {
@@ -222,5 +224,21 @@ button {
 .trending-card {
     background-color: white;
     border: 5px solid black;
+}
+
+.icons {
+    width: 2vw;
+    height: 2vw;
+}
+
+#dashboard-icon {
+    width: 40px;
+    height: 40px;
+    justify-self: center;
+    align-self: center;
+}
+
+#dashboard-text {
+    font-size: 2.5vw;
 }
 
