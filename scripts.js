@@ -2,8 +2,81 @@
 const newButton = document.getElementById("new-button");
 const cardForm = document.getElementById("cardForm");
 const cardModal = document.getElementById("card-modal");
-const cardsContainer = document.getElementsByClassName("cards-container");
-const closeButton = document.getElementsByClassName("close")[0];
+const cardsContainer = document.querySelector(".cards-container");
+const closeButton = document.querySelector(".close");
+
+// Function to save card data to localStorage
+function saveCardData(title, content, gitLink, liveLink) {
+    const cards = JSON.parse(localStorage.getItem("cards")) || [];
+    const newCard = { title, content, gitLink, liveLink };
+    cards.push(newCard);
+    localStorage.setItem("cards", JSON.stringify(cards));
+}
+
+// Function to create a card from data and append it to the cards container
+function createCardFromData(title, content, gitLink, liveLink) {
+    // Create a new card element
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    // Create and set the title element
+    const titleElement = document.createElement('p');
+    titleElement.className = "card-title";
+    titleElement.textContent = title;
+
+    // Create and set the content element
+    const contentElement = document.createElement('p');
+    contentElement.className = "card-text";
+    contentElement.textContent = content;
+
+    // Create a container for the icons
+    const cardIconContainer = document.createElement("div");
+    cardIconContainer.className = "card-icon-container";
+
+    // Create and set the live link icon element
+    const liveLinkIcon = document.createElement('img');
+    liveLinkIcon.className = "icons";
+    liveLinkIcon.src = "imgs/icons/view.svg";
+    liveLinkIcon.alt = "View icon";
+
+    // Create and set the Git link icon element
+    const gitLinkIcon = document.createElement('img');
+    gitLinkIcon.className = "icons";
+    gitLinkIcon.src = "imgs/icons/git.svg";
+    gitLinkIcon.alt = "Git icon";
+
+    // Create anchor elements for the icons and set href attributes
+    const liveLinkAnchor = document.createElement('a');
+    liveLinkAnchor.href = liveLink;
+    liveLinkAnchor.target = "_blank";
+    liveLinkAnchor.appendChild(liveLinkIcon);
+
+    const gitLinkAnchor = document.createElement('a');
+    gitLinkAnchor.href = gitLink;
+    gitLinkAnchor.target = "_blank";
+    gitLinkAnchor.appendChild(gitLinkIcon);
+
+    // Build the card structure
+    card.appendChild(titleElement);
+    card.appendChild(contentElement);
+    cardIconContainer.appendChild(liveLinkAnchor);
+    cardIconContainer.appendChild(gitLinkAnchor);
+    card.appendChild(cardIconContainer);
+
+    // Append the new card to the cards container
+    cardsContainer.appendChild(card);
+}
+
+// Function to load and display cards from localStorage when the page is loaded
+function loadCards() {
+    const cards = JSON.parse(localStorage.getItem("cards")) || [];
+    for (const card of cards) {
+        createCardFromData(card.title, card.content, card.gitLink, card.liveLink);
+    }
+}
+
+// Load cards when the page is loaded
+loadCards();
 
 // Show the new card modal when the button is clicked
 newButton.addEventListener('click', () => {
@@ -12,18 +85,18 @@ newButton.addEventListener('click', () => {
 
 // Hide the new card modal when form submission is complete
 const hideModal = () => {
-    modal.style.display = 'none';
+    cardModal.style.display = 'none';
 };
 
 // Add a click event listener to the exit button
 closeButton.addEventListener("click", function () {
-    modal.style.display = "none";
+    cardModal.style.display = "none";
 });
 
 // Close the modal when clicking out of the modal content
 window.addEventListener("click", function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
+    if (event.target === cardModal) {
+        cardModal.style.display = "none";
     }
 })
 
@@ -38,59 +111,13 @@ cardForm.addEventListener("submit", (event) => {
     const cardGitLink = document.getElementById('cardGitLink').value;
     const cardLiveLink = document.getElementById('cardLiveLink').value;
 
-    // Create a new card element
-    const card = document.createElement('div');
-    card.className = 'card';
+    // Save the card data to localStorage
+    saveCardData(cardTitle, cardContent, cardGitLink, cardLiveLink);
 
-    // Create and set the title element
-    const title = document.createElement('p');
-    title.className = "card-title";
-    title.textContent = cardTitle;
-
-    // Create and set the content element
-    const content = document.createElement('p');
-    content.className = "card-text"
-    content.textContent = cardContent;
-
-    // Create a container for the icons
-    const cardIconContainer = document.createElement("div");
-    cardIconContainer.className = "card-icon-container";
-
-    // Create and set the live link icon element
-    const liveLink = document.createElement('img');
-    liveLink.className = "icons";
-    liveLink.src = "imgs/icons/view.svg";
-    liveLink.alt = "View icon";
-
-    // Create and set the Git link icon element
-    const gitLink = document.createElement('img');
-    gitLink.className = "icons";
-    gitLink.src = "imgs/icons/git.svg";
-    gitLink.alt = "Git icon";
-
-    // Create anchor elements for the icons and set href attributes
-    const liveLinkAnchor = document.createElement('a');
-    liveLinkAnchor.href = cardLiveLink;
-    liveLinkAnchor.target = "_blank";
-    liveLinkAnchor.appendChild(liveLink);
-
-    const gitLinkAnchor = document.createElement('a');
-    gitLinkAnchor.href = cardGitLink;
-    gitLinkAnchor.target = "_blank";
-    gitLinkAnchor.appendChild(gitLink);
-
-    // Build the card structure
-    card.appendChild(title);
-    card.appendChild(content);
-    cardIconContainer.appendChild(liveLinkAnchor);
-    cardIconContainer.appendChild(gitLinkAnchor);
-    card.appendChild(cardIconContainer);
-
-    // Append the new card to the cards container
-    cardsContainer.appendChild(card);
+    // Create and append the new card
+    createCardFromData(cardTitle, cardContent, cardGitLink, cardLiveLink);
 
     // Reset the form
     cardForm.reset();
     hideModal();
 });
-
