@@ -5,7 +5,7 @@ html body {
 .main-container {
     display: grid;
     grid-template-rows: 100vh;
-    grid-template-columns: 20vw 80vw;
+    grid-template-columns: clamp(150px, 20vw, 300px) auto;
 }
 
 .left-container {
@@ -35,6 +35,7 @@ html body {
 .link {
     justify-self: start;
     align-self: center;
+    padding-left: 1vw;
 }
 
 .right-container {
@@ -75,10 +76,12 @@ html body {
     justify-content: end;
     align-items: start;
     gap: .5vw;
+    padding: 5px;
 }
 
 .profile-name-display {
     font-size: clamp(12px, calc(1.5vw + 1.5vh), 64px);
+
 }
 
 .welcome-container {
@@ -103,7 +106,8 @@ html body {
 
 .welcome-name {
     align-self: end;
-    font-size: clamp(12px, calc(1vw + 1vh), 50px)
+    font-size: clamp(12px, calc(1vw + 1vh), 50px);
+    padding: 5px;
 }
 
 .controls-container {
@@ -125,7 +129,7 @@ button {
 
 .content-container {
     display: grid;
-    grid-template-columns: 65vw 15vw;
+    grid-template-columns: minmax(200px, auto) clamp(150px, 15vw, 400px);
     grid-template-rows: 40vh 40vh;
 }
 
@@ -137,7 +141,7 @@ button {
 }
 
 .cards-label {
-    font-size: clamp(12px, calc(1vw + 1vh), 48px);
+    font-size: 12px;
     margin-left: 2vw;
     margin-top: 1vw;
 }
@@ -159,20 +163,22 @@ button {
     border-left: 10px solid orange;
     display: flex;
     flex-direction: column;
-    padding: .7vw;
+    padding: 10px;
     margin-bottom: 5px;
-    max-width: 200px;
-    max-height: 200px;
+    min-width: 25px;
+    min-height: 100px;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 .card-title {
     font-weight: bold;
-    margin: .5vw;
+    margin: 5px;
 }
 
 .card-text {
     font-size: min(max(12px, calc(.5vw + .5vh)), 18px);
-    margin: .5vw;
+    margin: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -209,7 +215,6 @@ button {
 }
 
 .announcement-text {
-    font-size: 12px;
     margin-top: 0vh;
     margin-bottom: 0vh;
     display: flex;
@@ -222,6 +227,7 @@ button {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    flex: 1 1 auto;
 }
 
 .announcement-card {
@@ -230,6 +236,7 @@ button {
     margin-bottom: 0px;
     margin-top: 0px;
     padding: 0;
+    flex: 1 1 auto;
 }
 
 .trending-container {
