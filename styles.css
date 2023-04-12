@@ -1,10 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
 html body {
+    min-height: 550px;
     margin: 0;
 }
 
 .main-container {
     display: grid;
-    grid-template-rows: 100vh;
+    grid-template-rows: 100%;
     grid-template-columns: clamp(150px, 20vw, 300px) auto;
 }
 
@@ -40,6 +45,7 @@ html body {
 
 .right-container {
     grid-area: 1/2/1/2;
+    height: 100%;
 }
 
 .header-container {
@@ -130,20 +136,21 @@ button {
 .content-container {
     display: grid;
     grid-template-columns: minmax(200px, auto) clamp(150px, 15vw, 400px);
-    grid-template-rows: 40vh 40vh;
+    grid-template-rows: 100%;
 }
 
 .projects-container {
     background-color: blue;
-    grid-area: 1/1/3/1;
-    display: grid;
-    grid-template-rows: 5% 95%;
+    grid-area: 1/1/2/1;
+    display: flex;
+    flex-direction: column;
 }
 
 .cards-label {
-    font-size: 12px;
+    font-size: calc(1vw + 1vh);
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     margin-left: 2vw;
-    margin-top: 1vw;
 }
 
 .cards-container {
@@ -152,7 +159,8 @@ button {
     align-content: start;
     justify-content: start;
     margin: 2vw;
-    margin-top: 1vw;
+    margin-top: 1vh;
+    margin-right: 0px;;
     margin-bottom: 0px;;
     gap: 2vw;
 }
@@ -165,9 +173,7 @@ button {
     flex-direction: column;
     padding: 10px;
     margin-bottom: 5px;
-    min-width: 25px;
-    min-height: 100px;
-    max-width: 400px;
+    max-width: 300px;
     max-height: 400px;
 }
 
@@ -192,34 +198,41 @@ button {
     padding: 10px;
 }
 
+.right-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    grid-area: 1/2/1/3;
+    height: 100%;
+}
+
 .announcements-container {
+    display: flex;
+    flex-direction: column;
     background-color: orange;
-    grid-area: 1/2/1/2;
-    display: grid;
-    grid-template-rows: 10% 90%;
 }
 
 .announcements-label {
-    font-size: clamp(12px, calc(1vw + 1vh), 48px);
-    margin-top: 1vw;
+    display: flex;
     justify-self: center;
+    align-self: center;
+    font-size: calc(1vw + 1vh);
 }
 
 .announcement-title {
     font-weight: bold;
-    font-size: 12px;
-    margin-top: .5vh;
-    margin-bottom: .5vh;
+    font-size: calc(.8vw + .8vh);
     display:flex;
     justify-content: center;
+    margin: 0px;
 }
 
 .announcement-text {
-    margin-top: 0vh;
-    margin-bottom: 0vh;
     display: flex;
+    font-size: calc(.70vw + .70vh);
     justify-content: center;
-    padding: .5vw;
+
+    margin: 0px;
+    padding: 10px;
 }
 
 .announcement-cards-container {
@@ -227,29 +240,25 @@ button {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex: 1 1 auto;
+
 }
 
 .announcement-card {
     border-bottom: .5vh solid rgba(128, 128, 128, 0.466);
     border-radius: 10px;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    margin: 5px;
     padding: 0;
-    flex: 1 1 auto;
+    background-color: white;
 }
 
 .trending-container {
+    display: flex;
+    flex-direction: column;
     background-color: gray;
-    grid-area: 2/2/2/2;
-    display: grid;
-    grid-template-rows: 10% 90%;
+
 }
 
 .trending-label {
-    font-size: clamp(12px, calc(1vw + 1vh), 48px);
-    margin-left: 2vw;
-    margin-top: 1vw;
 }
 
 .trending-cards-container {
@@ -257,6 +266,7 @@ button {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .trending-card {
@@ -264,6 +274,7 @@ button {
     border: 5px solid black;
     margin-top: 5px;
     margin-bottom: 5px;
+
 }
 
 .icons {
@@ -303,6 +314,10 @@ button {
 
 #notification-icon {
     align-self: start;
+}
+
+.cardForm {
+    
 }
 
 
