@@ -576,6 +576,7 @@ html body {
     .main-container {
         grid-template-columns: 1fr; /* Adjust the layout for smaller screens */
     }
+
 }
 
 
