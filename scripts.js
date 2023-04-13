@@ -10,6 +10,18 @@ const leftContainer = document.querySelector(".left-container");
 const rightContainer = document.querySelector(".right-container");
 const searchBar = document.querySelector('.search-bar');
 
+function enableOverlay () {
+    overlay.style.display = "block";
+    leftContainer.style.filter = "blur(5px)";
+    rightContainer.style.filter = "blur(5px)";
+}
+
+function disableOverlay () {
+    overlay.style.display = "none";
+    leftContainer.style.filter = "none";
+    rightContainer.style.filter = "none";
+}
+
 // Function to save card data to localStorage
 function saveCardData(title, content, gitLink, liveLink) {
     const cards = JSON.parse(localStorage.getItem("cards")) || [];
@@ -18,77 +30,88 @@ function saveCardData(title, content, gitLink, liveLink) {
     localStorage.setItem("cards", JSON.stringify(cards));
 }
 
-// Function to create a card from data and append it to the cards container
-function createCardFromData(title, content, gitLink, liveLink) {
-    // Create a new card element
+function createCardElement() {
     const card = document.createElement('div');
     card.className = 'card';
-
-    // Create close button
+    return card;
+  }
+  
+  function createCloseButtonElement() {
     const closeButton = document.createElement('div');
     closeButton.className = "close-button";
     closeButton.innerHTML = "&times;";
-    card.appendChild(closeButton);
-
-    // Attach click event to the close button
-    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
-
+    return closeButton;
+  }
   
-
-    // Create and set the title element
+  function createTitleElement(title) {
     const titleElement = document.createElement('p');
     titleElement.className = "card-title";
     titleElement.textContent = title;
-
-    // Create and set the content element
+    return titleElement;
+  }
+  
+  function createContentElement(content) {
     const contentElement = document.createElement('p');
     contentElement.className = "card-text";
     contentElement.textContent = content;
-
-    // Create a container for the icons
+    return contentElement;
+  }
+  
+  function createCardIconContainer() {
     const cardIconContainer = document.createElement("div");
     cardIconContainer.className = "card-icon-container";
-
-    // Create and set the live link icon element
-    const liveLinkIcon = document.createElement('img');
-    liveLinkIcon.className = "icons";
-    liveLinkIcon.src = "imgs/icons/view.svg";
-    liveLinkIcon.alt = "View icon";
-    liveLinkIcon.id = "view-icon";
-    liveLinkIcon.title = "View live page";
-
-    // Create and set the Git link icon element
-    const gitLinkIcon = document.createElement('img');
-    gitLinkIcon.className = "icons";
-    gitLinkIcon.src = "imgs/icons/git.svg";
-    gitLinkIcon.alt = "Git icon";
-    gitLinkIcon.id = "git-icon";
-    gitLinkIcon.title = "View on Github";
-
-    // Create anchor elements for the icons and set href attributes
-    const liveLinkAnchor = document.createElement('a');
-    liveLinkAnchor.href = liveLink;
-    liveLinkAnchor.target = "_blank";
-    liveLinkAnchor.appendChild(liveLinkIcon);
-
-    const gitLinkAnchor = document.createElement('a');
-    gitLinkAnchor.href = gitLink;
-    gitLinkAnchor.target = "_blank";
-    gitLinkAnchor.appendChild(gitLinkIcon);
-
+    return cardIconContainer;
+  }
+  
+  function createIconElement(className, src, alt, id, title) {
+    const icon = document.createElement('img');
+    icon.className = className;
+    icon.src = src;
+    icon.alt = alt;
+    icon.id = id;
+    icon.title = title;
+    return icon;
+  }
+  
+  function createLinkElement(href, target, child) {
+    const link = document.createElement('a');
+    link.href = href;
+    link.target = target;
+    link.appendChild(child);
+    return link;
+  }
+  
+  function createCardFromData(title, content, gitLink, liveLink) {
+    // Create card and its components
+    const card = createCardElement();
+    const closeButton = createCloseButtonElement();
+    card.appendChild(closeButton);
+  
+    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
+  
     // Build the card structure
+    const titleElement = createTitleElement(title);
+    const contentElement = createContentElement(content);
+    const cardIconContainer = createCardIconContainer();
+  
+    const liveLinkIcon = createIconElement("icons", "imgs/icons/view.svg", "View icon", "view-icon", "View live page");
+    const gitLinkIcon = createIconElement("icons", "imgs/icons/git.svg", "Git icon", "git-icon", "View on Github");
+  
+    const liveLinkAnchor = createLinkElement(liveLink, "_blank", liveLinkIcon);
+    const gitLinkAnchor = createLinkElement(gitLink, "_blank", gitLinkIcon);
+  
+    // Append the new card to the cards container and attach the click event
     card.appendChild(titleElement);
     card.appendChild(contentElement);
     cardIconContainer.appendChild(liveLinkAnchor);
     cardIconContainer.appendChild(gitLinkAnchor);
     card.appendChild(cardIconContainer);
-
-    // Append the new card to the cards container
+  
     cardsContainer.appendChild(card);
-
-    // Attach click event to the new card
+  
     attachCardClickEvent(card);
-}
+  }
+  
 
 // Function to load and display cards from localStorage when the page is loaded
 function loadCards() {
@@ -98,69 +121,77 @@ function loadCards() {
     }
 }
 
-// Load cards when the page is loaded
-loadCards();
-
-document.querySelectorAll('.card').forEach(card => {
-    const closeButton = card.querySelector('.close-button');
-    const title = card.querySelector('.card-title').textContent;
-    const content = card.querySelector('.card-text').textContent;
-    const gitLink = card.querySelector('#git-icon').parentElement.href;
-    const liveLink = card.querySelector('#view-icon').parentElement.href;
-  
-    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
-  });
-
-// Show the new card modal when the button is clicked
-newButton.addEventListener('click', () => {
-    cardModal.style.display = 'block';
-    overlay.style.display = "none";
-    leftContainer.style.filter = "blur(5px)";
-    rightContainer.style.filter = "blur(5px)";
-
-});
-
-// Hide the new card modal when form submission is complete
-const hideModal = () => {
-    cardModal.style.display = 'none';
-};
-
-// Add a click event listener to the exit button
-closeButton.addEventListener("click", function () {
-    cardModal.style.display = "none";
-    leftContainer.style.filter = "none";
-    rightContainer.style.filter = "none";
-});
-
 // Function to show the enlarged card
 function showEnlargedCard(cardHtml) {
     const cardEnlargedView = document.createElement('div');
     cardEnlargedView.id = 'card-enlarged-view';
     cardEnlargedView.innerHTML = cardHtml;
     cardEnlargedView.style.display = "flex";
-    overlay.style.display = "block";
-    leftContainer.style.filter = "blur(5px)";
-    rightContainer.style.filter = "blur(5px)";
+    enableOverlay ();
+
     overlay.appendChild(cardEnlargedView)
   }
 
-  cards.forEach(card => {
-    attachCardClickEvent(card);
-  });
-  
-
-  // Function to hide the enlarged card
-  function hideEnlargedCard() {
+// Function to hide the enlarged card
+function hideEnlargedCard() {
     // Remove the enlarged card view from the overlay
     const cardEnlargedView = document.getElementById('card-enlarged-view');
     if (cardEnlargedView) {
-      overlay.removeChild(cardEnlargedView);
+        overlay.removeChild(cardEnlargedView);
     }
-    // Toggle the display of the overlay element
-    overlay.style.display = "none";
-    leftContainer.style.filter = "none";
-    rightContainer.style.filter = "none";
-  }
+    
+    disableOverlay()
+}
+// Attach a click event listener to a card, which will show an enlarged version of the card when clicked
+function attachCardClickEvent(card) {
+    const cardHtml = card.innerHTML;
+    card.addEventListener('click', () => { 
+        // Show the enlarged card
+        showEnlargedCard(cardHtml);
+    });
+}
+
+function attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink) {
+    closeButton.addEventListener('click', (event) => {
+        // Prevent event propagation to the card element
+        event.stopPropagation();
+
+        // Prompt the user if they want to delete the card
+        const deleteCard = confirm("Are you sure you want to delete this card?");
+
+        if (deleteCard) {
+            // Remove the card from the DOM
+            card.remove();
+
+            // Remove the card from localStorage
+            const cards = JSON.parse(localStorage.getItem("cards")) || [];
+            const updatedCards = cards.filter(c => c.title !== title || c.content !== content || c.gitLink !== gitLink || c.liveLink !== liveLink);
+            localStorage.setItem("cards", JSON.stringify(updatedCards));
+        }
+    });
+}
+
+// Iterate through all cards, retrieve the relevant data, and attach a click event to the close button of each card.
+document.querySelectorAll('.card').forEach(card => {
+    const closeButton = card.querySelector('.close-button');
+    const title = card.querySelector('.card-title').textContent;
+    const content = card.querySelector('.card-text').textContent;
+    const gitLink = card.querySelector('#git-icon').parentElement.href;
+    const liveLink = card.querySelector('#view-icon').parentElement.href;
+    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
+});
+
+// Show the new card modal when the button is clicked
+newButton.addEventListener('click', () => {
+    cardModal.style.display = 'block';
+    enableOverlay();
+});
+
+// Add a click event listener to the exit button
+closeButton.addEventListener("click", function () {
+    cardModal.style.display = "none";
+    disableOverlay();
+});
 
 // Event listener for the form submission
 cardForm.addEventListener("submit", (event) => {
@@ -181,10 +212,8 @@ cardForm.addEventListener("submit", (event) => {
 
     // Reset the form
     cardForm.reset();
-    hideModal();
-    overlay.style.display = "none";
-    leftContainer.style.filter = "none";
-    rightContainer.style.filter = "none";
+    cardModal.style.display = 'none';
+    disableOverlay();
 });
 
 overlay.addEventListener("click", hideEnlargedCard);
@@ -197,18 +226,20 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
     const cards = document.getElementsByClassName("card");
     const noCardsMessage = document.querySelector(".no-cards-message");
   
+    // Declare a variable to store the number of visible cards
     let visibleCardCount = 0;
   
     // Loop through the cards and filter based on search input
     for (let i = 0; i < cards.length; i++) {
       const cardTitle = cards[i].querySelector(".card-title").textContent.toLowerCase();
-  
-      if (cardTitle.includes(searchValue)) {
-        cards[i].style.display = "block";
-        visibleCardCount++;
-      } else {
-        cards[i].style.display = "none";
-      }
+        
+        // Check if the card title includes the search value; if so, display the card and increase the visible card count, otherwise, hide the card
+        if (cardTitle.includes(searchValue)) {
+            cards[i].style.display = "block";
+            visibleCardCount++;
+        } else {
+            cards[i].style.display = "none";
+        }
     }
   
     // Show or hide the no-cards-message div based on the number of visible cards
@@ -217,39 +248,19 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
     } else {
       noCardsMessage.style.display = "none";
     }
-  });
+});
 
-  function attachCardClickEvent(card) {
-    const cardHtml = card.innerHTML;
-    card.addEventListener('click', () => { 
-      // Show the enlarged card
-      showEnlargedCard(cardHtml);
-    });
-  }
-  
-  function attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink) {
-    closeButton.addEventListener('click', (event) => {
-      // Prevent event propagation to the card element
-      event.stopPropagation();
-  
-      // Prompt the user if they want to delete the card
-      const deleteCard = confirm("Are you sure you want to delete this card?");
-  
-      if (deleteCard) {
-        // Remove the card from the DOM
-        card.remove();
-  
-        // Remove the card from localStorage
-        const cards = JSON.parse(localStorage.getItem("cards")) || [];
-        const updatedCards = cards.filter(c => c.title !== title || c.content !== content || c.gitLink !== gitLink || c.liveLink !== liveLink);
-        localStorage.setItem("cards", JSON.stringify(updatedCards));
-      }
-    });
-  }
-  
-  document.getElementById('toggle-button').addEventListener('click', function() {
+
+// Add a click event listener to the 'toggle-button' element to show/hide the left container
+document.getElementById('toggle-button').addEventListener('click', function() {
     const leftContainer = document.querySelector('.left-container');
     leftContainer.classList.toggle('visible');
 });
 
-  
+// Iterate through all cards and attach a click event to each card.
+cards.forEach(card => {
+    attachCardClickEvent(card);
+});
+ 
+// Load cards when the page is loaded
+loadCards();
