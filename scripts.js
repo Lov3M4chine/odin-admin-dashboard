@@ -21,6 +21,28 @@ function createCardFromData(title, content, gitLink, liveLink) {
     const card = document.createElement('div');
     card.className = 'card';
 
+    // Create close button
+    const closeButton = document.createElement('div');
+    closeButton.className = "close-button";
+    closeButton.innerHTML = "&times;";
+    card.appendChild(closeButton);
+
+    // Event listener for the close button
+    closeButton.addEventListener('click', () => {
+        // Prompt the user if they want to delete the card
+        const deleteCard = confirm("Are you sure you want to delete this card?");
+
+        if (deleteCard) {
+            // Remove the card from the DOM
+            card.remove();
+
+            // Remove the card from localStorage
+            const cards = JSON.parse(localStorage.getItem("cards")) || [];
+            const updatedCards = cards.filter(c => c.title !== title || c.content !== content || c.gitLink !== gitLink || c.liveLink !== liveLink);
+            localStorage.setItem("cards", JSON.stringify(updatedCards));
+        }
+    });
+
     // Create and set the title element
     const titleElement = document.createElement('p');
     titleElement.className = "card-title";
@@ -83,6 +105,7 @@ loadCards();
 // Show the new card modal when the button is clicked
 newButton.addEventListener('click', () => {
     cardModal.style.display = 'block';
+    overlay.style.display = "none";
 });
 
 // Hide the new card modal when form submission is complete
