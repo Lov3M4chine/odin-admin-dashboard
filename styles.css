@@ -11,7 +11,7 @@ html body {
 .main-container {
     display: grid;
     grid-template-rows: 100%;
-    grid-template-columns: clamp(150px, 20vw, 300px) auto;
+    grid-template-columns: auto auto;
     height: 100%;
 }
 
@@ -20,6 +20,7 @@ html body {
     background-color: #005F73;
     padding: 10px;
     height: 100%;
+    max-width: fit-content;
 }
 
 .icons-container {
@@ -27,6 +28,7 @@ html body {
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    gap: 2vw;
 }
 
 
@@ -35,6 +37,7 @@ html body {
     justify-content: start;
     align-items: center;
     color: #D8D8D8;
+    gap: 1vw;
 }
 
 .link {
