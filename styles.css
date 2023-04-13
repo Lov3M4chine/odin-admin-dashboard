@@ -19,7 +19,7 @@ html body {
 .left-container {
     grid-area: 1/1/1/1;
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 2fr;
     background-color: #005F73;
 }
@@ -537,6 +537,46 @@ html body {
     color: #005F73;
   }
 
- 
+  .toggle-button {
+    display: none; /* Initially, keep the button hidden */
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    color: #E9D8A6;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.toggle-button:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .toggle-button {
+        display: block; /* Show the button on smaller screens */
+        position: fixed;
+        top: 0px;
+        left: 0px;
+    }
+
+    .left-container {
+        position: fixed;
+        left: -100%; /* Hide the left container initially */
+        top: 0;
+        height: 100%;
+        z-index: 99;
+        transition: left 0.3s ease;
+    }
+
+    .left-container.visible {
+        left: 0; /* Show the left container when the button is clicked */
+    }
+
+    .main-container {
+        grid-template-columns: 1fr; /* Adjust the layout for smaller screens */
+    }
+}
+
 
 

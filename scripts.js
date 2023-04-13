@@ -247,4 +247,9 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
     });
   }
   
+  document.getElementById('toggle-button').addEventListener('click', function() {
+    const leftContainer = document.querySelector('.left-container');
+    leftContainer.classList.toggle('visible');
+});
+
   
