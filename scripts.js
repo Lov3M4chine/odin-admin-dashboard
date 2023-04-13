@@ -5,7 +5,6 @@ const cardModal = document.getElementById("card-modal");
 const cardsContainer = document.querySelector(".cards-container");
 const closeButton = document.querySelector(".close");
 const cards = document.querySelectorAll('.card');
-const cardEnlargedView = document.getElementById("card-enlarged-view")
 const overlay = document.querySelector(".overlay");
 
 // Function to save card data to localStorage
@@ -97,35 +96,33 @@ closeButton.addEventListener("click", function () {
 });
 
 // Function to show the enlarged card
-function showEnlargedCard() {
-    cardModal.style.display = "none";
+function showEnlargedCard(cardHtml) {
+    const cardEnlargedView = document.createElement('div');
+    cardEnlargedView.id = 'card-enlarged-view';
+    cardEnlargedView.innerHTML = cardHtml;
     cardEnlargedView.style.display = "flex";
     overlay.style.display = "block";
+    overlay.appendChild(cardEnlargedView)
   }
+
+  cards.forEach(card => {
+    const cardHtml = card.innerHTML;
+    card.addEventListener('click', () => { 
+      // Show the enlarged card
+      showEnlargedCard(cardHtml);
+    });
+  });
 
   // Function to hide the enlarged card
-function hideEnlargedCard() {
-    cardEnlargedView.style.display = "none";
-    overlay.style.display = "none";
-    console.log (cardEnlargedView.style.display)
-  }
-
-cards.forEach((card) => {
-  card.addEventListener("click", showEnlargedCard);
-});
-
-// Add click event listener to the overlay
-overlay.addEventListener("click", hideEnlargedCard);
-
-// Add click event listener to the close button
-closeButton.addEventListener("click", hideEnlargedCard);
-
-// Close the modal when clicking out of the modal content
-window.addEventListener("click", function(event) {
-    if (event.target === cardModal) {
-        cardModal.style.display = "none";
+  function hideEnlargedCard() {
+    // Remove the enlarged card view from the overlay
+    const cardEnlargedView = document.getElementById('card-enlarged-view');
+    if (cardEnlargedView) {
+      overlay.removeChild(cardEnlargedView);
     }
-})
+    // Toggle the display of the overlay element
+    overlay.style.display = "none";
+  }
 
 // Event listener for the form submission
 cardForm.addEventListener("submit", (event) => {
@@ -149,26 +146,4 @@ cardForm.addEventListener("submit", (event) => {
     hideModal();
 });
 
-
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        // Get the HTML content of the clicked card
-        overlay.style.display = "block";
-        cardEnlargedView.style.display = "block";
-        const cardHtml = card.innerHTML;
-
-        // Create a new element to hold the enlarged card view
-        const enlargedView = document.createElement('div');
-        enlargedView.id = 'card-enlarged-view';
-        enlargedView.innerHTML = cardHtml;
-
-        // Add the enlarged card view to the page
-        document.body.appendChild(enlargedView);
-    });
-});
-
-cardEnlargedView.addEventListener("click", function() {
-    // Toggle the display of the overlay element
-    closeButton.style.display = "block";
-    overlay.style.display = "block";
-  });
+overlay.addEventListener("click", hideEnlargedCard);
