@@ -391,11 +391,13 @@ html body {
 #profile-picture {
     width: clamp(12px, calc(1.5vw + 1.5vh), 36px);
     height: auto;
+    border-radius: 15px;
 }
 
 #welcome-profile-picture {
     width: 4vw;
     height: 4vw;
+    border-radius: 15px;
 }
 
 #notification-icon {

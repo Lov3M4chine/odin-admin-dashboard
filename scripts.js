@@ -30,21 +30,10 @@ function createCardFromData(title, content, gitLink, liveLink) {
     closeButton.innerHTML = "&times;";
     card.appendChild(closeButton);
 
-    // Event listener for the close button
-    closeButton.addEventListener('click', () => {
-        // Prompt the user if they want to delete the card
-        const deleteCard = confirm("Are you sure you want to delete this card?");
+    // Attach click event to the close button
+    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
 
-        if (deleteCard) {
-            // Remove the card from the DOM
-            card.remove();
-
-            // Remove the card from localStorage
-            const cards = JSON.parse(localStorage.getItem("cards")) || [];
-            const updatedCards = cards.filter(c => c.title !== title || c.content !== content || c.gitLink !== gitLink || c.liveLink !== liveLink);
-            localStorage.setItem("cards", JSON.stringify(updatedCards));
-        }
-    });
+  
 
     // Create and set the title element
     const titleElement = document.createElement('p');
@@ -66,6 +55,7 @@ function createCardFromData(title, content, gitLink, liveLink) {
     liveLinkIcon.src = "imgs/icons/view.svg";
     liveLinkIcon.alt = "View icon";
     liveLinkIcon.id = "view-icon";
+    liveLinkIcon.title = "View live page";
 
     // Create and set the Git link icon element
     const gitLinkIcon = document.createElement('img');
@@ -73,6 +63,7 @@ function createCardFromData(title, content, gitLink, liveLink) {
     gitLinkIcon.src = "imgs/icons/git.svg";
     gitLinkIcon.alt = "Git icon";
     gitLinkIcon.id = "git-icon";
+    gitLinkIcon.title = "View on Github";
 
     // Create anchor elements for the icons and set href attributes
     const liveLinkAnchor = document.createElement('a');
@@ -94,6 +85,9 @@ function createCardFromData(title, content, gitLink, liveLink) {
 
     // Append the new card to the cards container
     cardsContainer.appendChild(card);
+
+    // Attach click event to the new card
+    attachCardClickEvent(card);
 }
 
 // Function to load and display cards from localStorage when the page is loaded
@@ -106,6 +100,16 @@ function loadCards() {
 
 // Load cards when the page is loaded
 loadCards();
+
+document.querySelectorAll('.card').forEach(card => {
+    const closeButton = card.querySelector('.close-button');
+    const title = card.querySelector('.card-title').textContent;
+    const content = card.querySelector('.card-text').textContent;
+    const gitLink = card.querySelector('#git-icon').parentElement.href;
+    const liveLink = card.querySelector('#view-icon').parentElement.href;
+  
+    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
+  });
 
 // Show the new card modal when the button is clicked
 newButton.addEventListener('click', () => {
@@ -141,12 +145,9 @@ function showEnlargedCard(cardHtml) {
   }
 
   cards.forEach(card => {
-    const cardHtml = card.innerHTML;
-    card.addEventListener('click', () => { 
-      // Show the enlarged card
-      showEnlargedCard(cardHtml);
-    });
+    attachCardClickEvent(card);
   });
+  
 
   // Function to hide the enlarged card
   function hideEnlargedCard() {
@@ -181,6 +182,9 @@ cardForm.addEventListener("submit", (event) => {
     // Reset the form
     cardForm.reset();
     hideModal();
+    overlay.style.display = "none";
+    leftContainer.style.filter = "none";
+    rightContainer.style.filter = "none";
 });
 
 overlay.addEventListener("click", hideEnlargedCard);
@@ -214,5 +218,33 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
       noCardsMessage.style.display = "none";
     }
   });
+
+  function attachCardClickEvent(card) {
+    const cardHtml = card.innerHTML;
+    card.addEventListener('click', () => { 
+      // Show the enlarged card
+      showEnlargedCard(cardHtml);
+    });
+  }
+  
+  function attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink) {
+    closeButton.addEventListener('click', (event) => {
+      // Prevent event propagation to the card element
+      event.stopPropagation();
+  
+      // Prompt the user if they want to delete the card
+      const deleteCard = confirm("Are you sure you want to delete this card?");
+  
+      if (deleteCard) {
+        // Remove the card from the DOM
+        card.remove();
+  
+        // Remove the card from localStorage
+        const cards = JSON.parse(localStorage.getItem("cards")) || [];
+        const updatedCards = cards.filter(c => c.title !== title || c.content !== content || c.gitLink !== gitLink || c.liveLink !== liveLink);
+        localStorage.setItem("cards", JSON.stringify(updatedCards));
+      }
+    });
+  }
   
   
