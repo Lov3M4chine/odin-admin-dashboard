@@ -6,6 +6,9 @@ const cardsContainer = document.querySelector(".cards-container");
 const closeButton = document.querySelector(".close");
 const cards = document.querySelectorAll('.card');
 const overlay = document.querySelector(".overlay");
+const leftContainer = document.querySelector(".left-container");
+const rightContainer = document.querySelector(".right-container");
+const searchBar = document.querySelector('.search-bar');
 
 // Function to save card data to localStorage
 function saveCardData(title, content, gitLink, liveLink) {
@@ -62,12 +65,14 @@ function createCardFromData(title, content, gitLink, liveLink) {
     liveLinkIcon.className = "icons";
     liveLinkIcon.src = "imgs/icons/view.svg";
     liveLinkIcon.alt = "View icon";
+    liveLinkIcon.id = "view-icon";
 
     // Create and set the Git link icon element
     const gitLinkIcon = document.createElement('img');
     gitLinkIcon.className = "icons";
     gitLinkIcon.src = "imgs/icons/git.svg";
     gitLinkIcon.alt = "Git icon";
+    gitLinkIcon.id = "git-icon";
 
     // Create anchor elements for the icons and set href attributes
     const liveLinkAnchor = document.createElement('a');
@@ -106,6 +111,9 @@ loadCards();
 newButton.addEventListener('click', () => {
     cardModal.style.display = 'block';
     overlay.style.display = "none";
+    leftContainer.style.filter = "blur(5px)";
+    rightContainer.style.filter = "blur(5px)";
+
 });
 
 // Hide the new card modal when form submission is complete
@@ -116,6 +124,8 @@ const hideModal = () => {
 // Add a click event listener to the exit button
 closeButton.addEventListener("click", function () {
     cardModal.style.display = "none";
+    leftContainer.style.filter = "none";
+    rightContainer.style.filter = "none";
 });
 
 // Function to show the enlarged card
@@ -125,6 +135,8 @@ function showEnlargedCard(cardHtml) {
     cardEnlargedView.innerHTML = cardHtml;
     cardEnlargedView.style.display = "flex";
     overlay.style.display = "block";
+    leftContainer.style.filter = "blur(5px)";
+    rightContainer.style.filter = "blur(5px)";
     overlay.appendChild(cardEnlargedView)
   }
 
@@ -145,6 +157,8 @@ function showEnlargedCard(cardHtml) {
     }
     // Toggle the display of the overlay element
     overlay.style.display = "none";
+    leftContainer.style.filter = "none";
+    rightContainer.style.filter = "none";
   }
 
 // Event listener for the form submission
@@ -170,3 +184,35 @@ cardForm.addEventListener("submit", (event) => {
 });
 
 overlay.addEventListener("click", hideEnlargedCard);
+
+document.getElementById("searchBar").addEventListener("keyup", function () {
+    // Get the search input value
+    const searchValue = this.value.toLowerCase();
+  
+    // Get all the card elements
+    const cards = document.getElementsByClassName("card");
+    const noCardsMessage = document.querySelector(".no-cards-message");
+  
+    let visibleCardCount = 0;
+  
+    // Loop through the cards and filter based on search input
+    for (let i = 0; i < cards.length; i++) {
+      const cardTitle = cards[i].querySelector(".card-title").textContent.toLowerCase();
+  
+      if (cardTitle.includes(searchValue)) {
+        cards[i].style.display = "block";
+        visibleCardCount++;
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  
+    // Show or hide the no-cards-message div based on the number of visible cards
+    if (visibleCardCount === 0) {
+      noCardsMessage.style.display = "block";
+    } else {
+      noCardsMessage.style.display = "none";
+    }
+  });
+  
+  

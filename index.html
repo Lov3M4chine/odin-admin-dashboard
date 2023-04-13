@@ -62,7 +62,7 @@
             <div class="header-container">
                 <div class="search-container">
                     <img class="icons" src="imgs/icons/search.svg" alt="Search icon">
-                    <div class="search-bar"></div>
+                    <input type="text" id="searchBar" class="search-bar" placeholder="Search...">
                 </div>
                 <div class="profile-container">
                     <img class="icons" id="notification-icon" src="imgs/icons/notification.svg" alt="Notification icon">
@@ -84,6 +84,7 @@
                 <div class="projects-container">
                     <div class="cards-label">Your Projects</div>
                     <div class="cards-container">
+                        <div class="no-cards-message" style="display: none;">No cards match that search criteria.</div>
                         <div class="card">
                             <div class="close-button">&times</div>
                             <p class="card-title">Super Cool Project</p>
