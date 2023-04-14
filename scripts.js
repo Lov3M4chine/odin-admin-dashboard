@@ -1,3 +1,5 @@
+// === DOM Element References ===
+
 // Get reference to the button, card form, and card container elements
 const newButton = document.getElementById("new-button");
 const cardForm = document.getElementById("cardForm");
@@ -8,7 +10,8 @@ const cards = document.querySelectorAll('.card');
 const overlay = document.querySelector(".overlay");
 const leftContainer = document.querySelector(".left-container");
 const rightContainer = document.querySelector(".right-container");
-const searchBar = document.querySelector('.search-bar');
+
+// === Function Definitions===
 
 function enableOverlay () {
     overlay.style.display = "block";
@@ -171,15 +174,7 @@ function attachCloseButtonClickEvent(card, closeButton, title, content, gitLink,
     });
 }
 
-// Iterate through all cards, retrieve the relevant data, and attach a click event to the close button of each card.
-document.querySelectorAll('.card').forEach(card => {
-    const closeButton = card.querySelector('.close-button');
-    const title = card.querySelector('.card-title').textContent;
-    const content = card.querySelector('.card-text').textContent;
-    const gitLink = card.querySelector('#git-icon').parentElement.href;
-    const liveLink = card.querySelector('#view-icon').parentElement.href;
-    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
-});
+// === Event Listeners ===
 
 // Show the new card modal when the button is clicked
 newButton.addEventListener('click', () => {
@@ -261,6 +256,18 @@ document.getElementById('toggle-button').addEventListener('click', function() {
 cards.forEach(card => {
     attachCardClickEvent(card);
 });
- 
+
+// Iterate through all cards, retrieve the relevant data, and attach a click event to the close button of each card.
+document.querySelectorAll('.card').forEach(card => {
+    const closeButton = card.querySelector('.close-button');
+    const title = card.querySelector('.card-title').textContent;
+    const content = card.querySelector('.card-text').textContent;
+    const gitLink = card.querySelector('#git-icon').parentElement.href;
+    const liveLink = card.querySelector('#view-icon').parentElement.href;
+    attachCloseButtonClickEvent(card, closeButton, title, content, gitLink, liveLink);
+});
+
+// === Initialization ===
+
 // Load cards when the page is loaded
 loadCards();
