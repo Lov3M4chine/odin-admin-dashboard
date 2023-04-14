@@ -84,6 +84,15 @@ function createCardElement() {
     return link;
   }
   
+  // Prevent event propagation to the card element
+  function handleIconClick(event) {
+    event.stopPropagation();
+  }
+
+  function attachIconClickEvent(iconElement) {
+    iconElement.addEventListener('click', handleIconClick);
+  }
+  
   function createCardFromData(title, content, gitLink, liveLink) {
     // Create card and its components
     const card = createCardElement();
@@ -102,6 +111,10 @@ function createCardElement() {
   
     const liveLinkAnchor = createLinkElement(liveLink, "_blank", liveLinkIcon);
     const gitLinkAnchor = createLinkElement(gitLink, "_blank", gitLinkIcon);
+
+    // Attach the handleIconClick event to the liveLinkAnchor and gitLinkAnchor elements
+    liveLinkAnchor.addEventListener("click", handleIconClick);
+    gitLinkAnchor.addEventListener("click", handleIconClick);
   
     // Append the new card to the cards container and attach the click event
     card.appendChild(titleElement);
@@ -254,7 +267,11 @@ document.getElementById('toggle-button').addEventListener('click', function() {
 
 // Iterate through all cards and attach a click event to each card.
 cards.forEach(card => {
+    const liveLinkIcon = card.querySelector('#view-icon');
+    const gitLinkIcon = card.querySelector('#git-icon');
     attachCardClickEvent(card);
+    attachIconClickEvent(liveLinkIcon);
+    attachIconClickEvent(gitLinkIcon);
 });
 
 // Iterate through all cards, retrieve the relevant data, and attach a click event to the close button of each card.
