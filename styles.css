@@ -230,13 +230,14 @@ body {
 
 .card-title {
     font-weight: bold;
+    font-size: min(max(12px, calc(1.2vw + 1.2vh)), 20px);
     margin: 5px;
     color: #E9D8A6;
 
 }
 
 .card-text {
-    font-size: min(max(12px, calc(.5vw + .5vh)), 18px);
+    font-size: min(max(12px, calc(1vw + 1vh)), 18px);
     margin: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -282,7 +283,7 @@ body {
 
 .announcement-title, .trending-title {
     font-weight: bold;
-    font-size: calc(.8vw + .8vh);
+    font-size: min(max(12px, calc(.8vw + .8vh)), 16px);
     display:flex;
     justify-content: start;
     align-items: center;
@@ -294,7 +295,7 @@ body {
 
 .announcement-text, .trending-text{
     display: flex;
-    font-size: calc(.70vw + .70vh);
+    font-size: min(max(12px, calc(.7vw + .7vh)), 14px);
     justify-content: center;
     margin: 0px;
     padding: 10px;
