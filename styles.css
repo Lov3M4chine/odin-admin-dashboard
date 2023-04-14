@@ -190,7 +190,7 @@ body {
 }
 
 .cards-label {
-    font-size: calc(1vw + 1vh);
+    font-size: clamp(14px, 1.5vw + 1.5vh, 24px);
     margin-top: 1vh;
     margin-bottom: 1vh;
     margin-left: 2vw;
@@ -198,8 +198,7 @@ body {
     background-color: #005F73;
     border-radius: 10px;
     padding: .5vh 1vw;
-    width: 15vw;
-    min-width: 120px;
+    width: fit-content;
 }
 
 .cards-container {
@@ -271,7 +270,7 @@ body {
 }
 
 .announcements-label, .trending-label {
-    font-size: calc(1vw + 1vh);
+    font-size: clamp(14px, 1.5vw + 1.5vh, 24px);
     margin-top: 1vh;
     margin-bottom: 1vh;
     margin-left: 2vw;
@@ -279,13 +278,12 @@ body {
     background-color: #005F73;
     border-radius: 10px;
     padding: 5px;
-    width: 12vw;
-    min-width: 120px;
+    white-space: nowrap;
 }
 
 .announcement-title, .trending-title {
     font-weight: bold;
-    font-size: min(max(12px, calc(.8vw + .8vh)), 16px);
+    font-size: min(max(12px, calc(1.2vw + 1.2vh)), 20px);
     display:flex;
     justify-content: center;
     align-items: center;
@@ -298,7 +296,7 @@ body {
 
 .announcement-text, .trending-text{
     display: flex;
-    font-size: min(max(12px, calc(.7vw + .7vh)), 14px);
+    font-size: min(max(12px, calc(1vw + 1vh)), 18px);
     justify-content: center;
     margin: 0px;
     padding: 5px;
