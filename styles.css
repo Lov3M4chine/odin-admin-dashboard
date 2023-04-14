@@ -439,7 +439,7 @@ body {
   }
 
 #card-submit-button {
-        font-size: calc(.8vw + .8vh);
+    font-size: calc(.8vw + .8vh);
   }
 
 .overlay:not(#card-enlarged-view) {
